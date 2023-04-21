@@ -79,7 +79,7 @@ shaper = Synth.after(sine, \shaper, [
 
 
 // GUI
-image = Image.new(SCDoc.helpSourceDir +/+ "images/background.png");
+image = Image.new(thisProcess.nowExecutingPath.dirname +/+ "images/background.png");
 alpha = 1.0;
 bounds = Rect(0, 0, 1280, 720);
 
@@ -92,11 +92,11 @@ window.front;
 
 
 // Labels
-TextView(window, Rect(310, 280, 40, 25)).string_("Freq1");
-TextView(window, Rect(450, 280, 40, 25)).string_("Gain1");
-TextView(window, Rect(790, 280, 40, 25)).string_("Gain2");
-TextView(window, Rect(925, 280, 40, 25)).string_("Freq2");
-TextView(window, Rect(615, 345, 60, 25)).string_("Global Out");
+TextView(window, Rect(310, 280, 46, 23)).string_("FREQ 1").font_(Font("Monaco",10));
+TextView(window, Rect(450, 280, 46, 23)).string_("GAIN 1").font_(Font("Monaco",10));
+TextView(window, Rect(790, 280, 46, 23)).string_("GAIN 2").font_(Font("Monaco",10));
+TextView(window, Rect(925, 280, 46, 23)).string_("FREQ 2").font_(Font("Monaco",10));
+TextView(window, Rect(588, 335, 99, 30)).string_("GLOBAL OUT").font_(Font("Monaco",15));
 //StaticText(window, Rect(230, 137, 120, 20)).string_("Distortion Type");
 //StaticText(window, Rect(470, 137, 100, 20)).string_("Filter Cutoff");
 //StaticText(window, Rect(120, 137, 60, 20)).string_("Frequency");
@@ -203,7 +203,7 @@ cutoffMenu = PopUpMenu(window, Rect(1020, 325, 150, 30))
 
 
 // Create an analyzer
-scopePos = FreqScopeView(window, Rect(200, 400, 250, 200)).active_(true);
+scopePos = FreqScopeView(window, Rect(200, 400, 260, 248)).active_(true);
 scope = Stethoscope(Server.default, view: scopePos);
 freq = FreqScopeView(window, Rect(750, 450, 300, 150)).active_(true);
 freq.freqMode = 0;
