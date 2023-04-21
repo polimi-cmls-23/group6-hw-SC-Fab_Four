@@ -79,7 +79,7 @@ shaper = Synth.after(sine, \shaper, [
 
 
 // GUI
-image = Image.new(SCDoc.helpSourceDir +/+ "images/background.png");
+image = Image.new(thisProcess.nowExecutingPath.dirname +/+ "images/background.png");
 alpha = 1.0;
 bounds = Rect(0, 0, 1280, 720);
 
