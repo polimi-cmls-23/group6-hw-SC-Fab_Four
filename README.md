@@ -1,5 +1,10 @@
 # FabDist - A SuperCollider Toolbox to teach and learn distortion
 
+![Alt text](https://raw.githubusercontent.com/polimi-cmls-23/group6-hw-SC-Fab_Four/main/teach.PNG)
+
+![Alt text](https://raw.githubusercontent.com/polimi-cmls-23/group6-hw-SC-Fab_Four/main/learn.PNG)
+
+
 This project aims to create an audio distortion box for teaching and learning purpose using the SuperCollider programming language.
 The synthesizer is designed to produce one or two sine waves and apply various distortion techniques to the generated sound.
 The project also features a graphical user interface (GUI) for controlling various parameters such as input gain, output gain, distortion type, filter cutoff and frequency.
