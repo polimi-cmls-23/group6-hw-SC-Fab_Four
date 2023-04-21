@@ -193,7 +193,7 @@ transferFunctionBox = TextView(window, Rect(265, 320, 200, 40))
 .string_("f(x) = x"); // Set the initial transfer function (identityCurve)
 
 // Create a filter cutoff control menu
-cutoffMenu = PopUpMenu(window, Rect(1020, 325, 150, 30))
+cutoffMenu = PopUpMenu(window, Rect(875, 325, 150, 30))
 .font_(Font("Monaco",15))
 .items_(["18000 Hz", "16000 Hz", "12000 Hz", "8000 Hz", "4000 Hz", "2000 Hz"])
 .action_({ arg me;
