@@ -1,10 +1,7 @@
 # FabDist - A SuperCollider Toolbox to teach and learn distortion
 
 
-<img src="https://raw.githubusercontent.com/polimi-cmls-23/group6-hw-SC-Fab_Four/main/teach.PNG" alt="FabDist-teach" width="150"/>
-
-
-<img src="https://raw.githubusercontent.com/polimi-cmls-23/group6-hw-SC-Fab_Four/main/learn.PNG" alt="FabDist-learn" width="150"/>
+<img src="https://raw.githubusercontent.com/polimi-cmls-23/group6-hw-SC-Fab_Four/main/teach.PNG" alt="FabDist-teach" width="450"/> <img src="https://raw.githubusercontent.com/polimi-cmls-23/group6-hw-SC-Fab_Four/main/learn.PNG" alt="FabDist-learn" width="450"/>
 
 
 
