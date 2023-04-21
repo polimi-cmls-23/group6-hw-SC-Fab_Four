@@ -23,7 +23,7 @@ The learning GUI is organized as a score quiz where the user has to recognize th
 - Waveform display
 - Transfer function display
 
-## Features of teach script
+## Features of learn script
 
 - Interactive quiz interface to learn and identify different types of audio distortion
 - Real-time audio processing using SuperCollider
