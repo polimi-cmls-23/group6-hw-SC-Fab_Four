@@ -1,8 +1,11 @@
 # FabDist - A SuperCollider Toolbox to teach and learn distortion
 
-![Alt text](https://raw.githubusercontent.com/polimi-cmls-23/group6-hw-SC-Fab_Four/main/teach.PNG)
 
-![Alt text](https://raw.githubusercontent.com/polimi-cmls-23/group6-hw-SC-Fab_Four/main/learn.PNG)
+<img src="https://raw.githubusercontent.com/polimi-cmls-23/group6-hw-SC-Fab_Four/main/teach.PNG" alt="FabDist-teach" width="150"/>
+
+
+<img src="https://raw.githubusercontent.com/polimi-cmls-23/group6-hw-SC-Fab_Four/main/learn.PNG" alt="FabDist-learn" width="150"/>
+
 
 
 This project aims to create an audio distortion box for teaching and learning purpose using the SuperCollider programming language.
