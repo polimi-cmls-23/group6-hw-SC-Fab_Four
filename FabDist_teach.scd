@@ -2,7 +2,7 @@ Server.killAll;
 s.boot;
 
 (
-var window, freq, scope, sine1FrequencyKnob, sine2FrequencyKnob, sine1GainKnob, sine2GainKnob, knob3, startButton1, startButton2, sine, sine2, gain, curve, distMenu, oversamplingMenu, inputSignal, filteredSignal, filterCutoff, cutoffMenu, selectedCutoff, distortionType, identityCurveFunction, identityCurveSignal, identityCurve, hardClipCurve, hardClipCurveAsym, softClipCurve, softClipCurveAsym, halfRectCurve, fullRectCurve, signalBuffer, inputBus, distortedSignal, shaper, buffer, hardClipCurveFunction, hardClipCurveFunctionAsym, softClipCurveFunction, softClipCurveFunctionAsym, halfRectCurveFunction, fullRectCurveFunction, hardClipCurveSignal, hardClipCurveSignalAsym, softClipCurveSignal, softClipCurveSignalAsym, halfRectCurveSignal, fullRectCurveSignal, outputBus, inputScope, outputScope, transferFunctionBox, freqValue1, freqValue2, image, alpha, bounds, compositeView, scopePos, freqModeMenu, dbRangeMenu;
+var window, freq, scope, sine1FrequencyKnob, sine2FrequencyKnob, sine1GainKnob, sine2GainKnob, knob3, startButton1, startButton2, sine, sine2, gain, curve, distMenu, oversamplingMenu, inputSignal, filteredSignal, filterCutoff, cutoffMenu, selectedCutoff, distortionType, identityCurveFunction, identityCurveSignal, identityCurve, hardClipCurve, hardClipCurveAsym, softClipCurve, softClipCurveAsym, halfRectCurve, fullRectCurve, signalBuffer, inputBus, distortedSignal, shaper, buffer, hardClipCurveFunction, hardClipCurveFunctionAsym, softClipCurveFunction, softClipCurveFunctionAsym, halfRectCurveFunction, fullRectCurveFunction, hardClipCurveSignal, hardClipCurveSignalAsym, softClipCurveSignal, softClipCurveSignalAsym, halfRectCurveSignal, fullRectCurveSignal, outputBus, inputScope, outputScope, transferFunctionBox, freqValue1, freqValue2, image, alpha, bounds, compositeView, scopePos, freqModeMenu, dbRangeMenu, transferFunc, data, x, plotContainer, transferFuncPlot, val;
 
 
 //BUSSES
@@ -79,7 +79,7 @@ shaper = Synth.after(sine, \shaper, [
 
 
 // GUI
-image = Image.new(thisProcess.nowExecutingPath.dirname +/+ "images/background.png");
+image = Image.new(thisProcess.nowExecutingPath.dirname +/+ "images/teachbg.png");
 alpha = 1.0;
 bounds = Rect(0, 0, 1280, 720);
 
@@ -89,6 +89,14 @@ window = Window("FabDist_Teach Mode", Rect(100,80, 1280, 720))
 window.view.setBackgroundImage(image, 11, alpha, bounds);
 window.front;
 
+b = Button(window, Rect(422, 678, 437, 30))
+.states_([["TAKE ME TO THE QUIZ", Color.black, Color.red]])
+.font_(Font("Monaco",20, true))
+.action = {
+	thisProcess.interpreter.executeFile("FabDist_learn.scd");
+	sine.run(false);
+	sine2.run(false);
+};
 
 
 // Labels
@@ -97,22 +105,16 @@ TextView(window, Rect(450, 280, 46, 23)).string_("GAIN 1").font_(Font("Monaco",1
 TextView(window, Rect(790, 280, 46, 23)).string_("GAIN 2").font_(Font("Monaco",10));
 TextView(window, Rect(925, 280, 46, 23)).string_("FREQ 2").font_(Font("Monaco",10));
 TextView(window, Rect(588, 335, 99, 30)).string_("GLOBAL OUT").font_(Font("Monaco",15));
-//StaticText(window, Rect(230, 137, 120, 20)).string_("Distortion Type");
-//StaticText(window, Rect(470, 137, 100, 20)).string_("Filter Cutoff");
-//StaticText(window, Rect(120, 137, 60, 20)).string_("Frequency");
-//StaticText(window, Rect(20, 137, 150, 20)).string_("Transfer Function:");
-
-
 
 // Create a start/stop button
-startButton1 = Button(window, Rect(89, 103, 150, 72))
-.font_(Font("Monaco",20))
+startButton1 = Button(window, Rect(89, 107, 150, 64))
+.font_(Font("Monaco",30, true))
 .states_([
 	[ "START", Color.black, Color.gray],
 	["STOP", Color.white, Color.red]
 ])
 .action = { arg me;
-    var val = me.value.postln;
+    val = me.value;
     if (val == 1) {
         sine.run;
 	} { sine.run(false) }
@@ -123,6 +125,7 @@ startButton1 = Button(window, Rect(89, 103, 150, 72))
 // Create a frequency knob
 sine1FrequencyKnob = Knob(window, Rect(267, 137, 135, 135))
 .valueAction_(0.01) // Initial value (0.5 is the middle of the range)
+.color_([Color.new255(200,0,0), Color.new255(10,150,234), Color.white])
 .action_({ arg me;
     freqValue1 = me.value.linexp(0, 1, 100, 17000); // Convert knob value to a frequency range (100Hz to 700Hz)
     sine.set(\freq1, freqValue1);
@@ -131,18 +134,18 @@ sine1FrequencyKnob = Knob(window, Rect(267, 137, 135, 135))
 // Create an input gain knob
 sine1GainKnob = Knob(window, Rect(404, 137, 135, 135))
 .valueAction_(0.4)
-.action_({ arg me; sine.set(\ampin1 , me.value) });
+.action_({ arg me; sine.set(\ampin1 , me.value) })
+.color_([Color.new255(200,0,0), Color.new255(10,150,234), Color.white]);
 
 
-
-startButton2 = Button(window, Rect(1042, 103, 150, 72))
-.font_(Font("Monaco",20))
+startButton2 = Button(window, Rect(1042, 107, 150, 64))
+.font_(Font("Monaco",30, true))
 .states_([
 	[ "START", Color.black, Color.gray],
 	["STOP", Color.white, Color.red]
 ])
 .action = { arg me;
-    var val = me.value.postln;
+    val = me.value;
     if (val == 1) {
         sine2.run;
 	} { sine2.run(false) }
@@ -150,19 +153,28 @@ startButton2 = Button(window, Rect(1042, 103, 150, 72))
 
 sine2FrequencyKnob = Knob(window, Rect(877, 137, 135, 135))
 .valueAction_(0.5) // Initial value (0.5 is the middle of the range)
+.color_([Color.new255(200,0,0), Color.new255(10,150,234), Color.white])
 .action_({ arg me;
-    freqValue2 = me.value.linexp(0, 1, 100, 17000); // Convert knob value to a frequency range (100Hz to 700Hz)
+    freqValue2 = me.value.linexp(0, 1, 100, 17000); // Convert knob value to a frequency range (100Hz to 17000Hz)
     sine2.set(\freq1, freqValue2);
 });
 
 sine2GainKnob = Knob.new(window, Rect(740, 137, 135, 135))
 .valueAction_(0.2)
+	.color_([Color.new255(200,0,0), Color.new255(10,150,234), Color.white])
 .action_({ arg me; sine2.set(\ampin1 , me.value) });
 
 // Create an output gain knob
 knob3 = Knob(window, Rect(540, 137, 200, 200))
 .valueAction_(1)
+.color_([Color.new255(255, 216, 15), Color.new255(200,0,200), Color.white])
 .action_({ arg me; shaper.set(\gain , me.value) });
+
+// Add a CompositeView to contain the Plotter
+plotContainer = CompositeView(window, Rect(66, 390, 380, 263)).background_(Color.gray);
+
+// Create a Plotter
+transferFuncPlot = Plotter.new("Transfer Function Plot", parent: plotContainer);
 
 // Create a distortion type menu
 distMenu = PopUpMenu(window, Rect(65, 325, 150, 30));
@@ -183,6 +195,33 @@ distMenu.action = { arg distMenu;
 
 	// Update the transfer function in the text box
     transferFunctionBox.string_(~transferFunctions[distMenu.value]);
+
+	// Plot the transfer function
+    switch (distMenu.value,
+        0, { transferFunc = identityCurveFunction; },
+        1, { transferFunc = softClipCurveFunction; },
+        2, { transferFunc = softClipCurveFunctionAsym; },
+        3, { transferFunc = hardClipCurveFunction; },
+        4, { transferFunc = hardClipCurveFunctionAsym; },
+        5, { transferFunc = halfRectCurveFunction; },
+        6, { transferFunc = fullRectCurveFunction; }
+    );
+
+        data = Array.fill(1000, { |i|
+        x = i / 999.0 * 2.0 - 1.0;
+        transferFunc.value(x);
+    });
+	// Update the plotter value
+	transferFuncPlot.value = data;
+	transferFuncPlot.update;
+	transferFuncPlot.setProperties(
+		\fontColor, Color.red,
+		\plotColor, Color.white,
+		\backgroundColor, Color.black,
+		\gridColorX, Color.white,
+		\labelX, "Transfer Function Plot"
+	);
+	transferFuncPlot.refresh;
 };
 
 //Textbox to view the transfer function
@@ -193,7 +232,7 @@ transferFunctionBox = TextView(window, Rect(265, 320, 200, 40))
 .string_("f(x) = x"); // Set the initial transfer function (identityCurve)
 
 // Create a filter cutoff control menu
-cutoffMenu = PopUpMenu(window, Rect(875, 325, 150, 30))
+cutoffMenu = PopUpMenu(window, Rect(1020, 325, 150, 30))
 .font_(Font("Monaco",15))
 .items_(["18000 Hz", "16000 Hz", "12000 Hz", "8000 Hz", "4000 Hz", "2000 Hz"])
 .action_({ arg me;
@@ -203,15 +242,15 @@ cutoffMenu = PopUpMenu(window, Rect(875, 325, 150, 30))
 
 
 // Create an analyzer
-scopePos = FreqScopeView(window, Rect(200, 400, 260, 248)).active_(true);
+scopePos = FreqScopeView(window, Rect(500, 400, 260, 230)).active_(true);
 scope = Stethoscope(Server.default, view: scopePos);
-freq = FreqScopeView(window, Rect(750, 450, 300, 150)).active_(true);
+freq = FreqScopeView(window, Rect(835, 390, 382, 230)).active_(true);
 freq.freqMode = 0;
 freq.dbRange = 120;
 
 // FreqScopeView Controls
 // Control for freqMode
-freqModeMenu = PopUpMenu(window, Rect(750, 620, 150, 30))
+freqModeMenu = PopUpMenu(window, Rect(850, 620, 150, 30))
 .font_(Font("Monaco", 15))
 .items_(["Linear Frequency", "Log Frequency"])
 .action_({ |me|
@@ -219,8 +258,8 @@ freqModeMenu = PopUpMenu(window, Rect(750, 620, 150, 30))
 });
 
 // Control for dbRange
-dbRangeMenu = PopUpMenu(window, Rect(900, 620, 150, 30))
-.font_(Font("Monaco", 15))
+dbRangeMenu = PopUpMenu(window, Rect(1000, 620, 150, 30))
+.font_(Font("Monaco", 15, true))
 .items_(["60 dB", "90 dB", "120 dB", "150 dB"])
 .action_({ |me|
     freq.dbRange_([60, 90, 120, 150][me.value]);
@@ -228,10 +267,6 @@ dbRangeMenu = PopUpMenu(window, Rect(900, 620, 150, 30))
 
 
 // Set the onClose action for the window
-window.onClose_({ sine.free; freq.kill; s.freeAll; });
-
-// Initialize with the sound off
-//sine.run(false);
-//s.plotTree;
+window.onClose_({ sine.free; s.freeAll;});
 
 )
