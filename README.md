@@ -26,7 +26,7 @@ The learning GUI is organized as a score quiz where the user has to recognize th
 - Low-pass filter with selectable cutoff frequencies
 - Frequency spectrum analyzer
 - Waveform display
-- Transfer function display
+- Transfer function display and plot
 
 ## Features of learn script
 
