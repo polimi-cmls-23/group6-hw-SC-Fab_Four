@@ -79,7 +79,7 @@ shaper = Synth.after(sine, \shaper, [
 
 
 // GUI
-image = Image.new(thisProcess.nowExecutingPath.dirname +/+ "images/teachbg.png");
+image = Image.new("images/teachbg.png");
 alpha = 1.0;
 bounds = Rect(0, 0, 1280, 720);
 
@@ -171,7 +171,7 @@ knob3 = Knob(window, Rect(540, 137, 200, 200))
 .action_({ arg me; shaper.set(\gain , me.value) });
 
 // Add a CompositeView to contain the Plotter
-plotContainer = CompositeView(window, Rect(66, 390, 380, 263)).background_(Color.gray);
+plotContainer = CompositeView(window, Rect(66, 390, 380, 263)).background_(Color.black);
 
 // Create a Plotter
 transferFuncPlot = Plotter.new("Transfer Function Plot", parent: plotContainer);
@@ -224,8 +224,11 @@ distMenu.action = { arg distMenu;
 	transferFuncPlot.refresh;
 };
 
+
+
+
+
 //Textbox to view the transfer function
-//StaticText(window, Rect(265, 325, 150, 30)).string_("Transfer Function:");
 transferFunctionBox = TextView(window, Rect(265, 320, 200, 40))
 .font_(Font("Monaco",12))
 .background_(Color.white)
