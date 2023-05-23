@@ -247,7 +247,7 @@ resultText = StaticText(window, Rect(380, 660, 511, 40))
 ~nextQuestion.();
 
 // Set the onClose action for the window
-window.onClose_({ sine.free; s.freeAll;});
+window.onClose_({ sine.free;});
 
 
 )
