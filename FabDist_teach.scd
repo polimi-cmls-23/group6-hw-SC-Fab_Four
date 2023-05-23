@@ -2,7 +2,7 @@ Server.killAll;
 s.boot;
 
 (
-var window, freq, scope, sine1FrequencyKnob, sine2FrequencyKnob, sine1GainKnob, sine2GainKnob, knob3, startButton1, startButton2, sine, sine2, gain, curve, distMenu, oversamplingMenu, inputSignal, filteredSignal, filterCutoff, cutoffMenu, selectedCutoff, distortionType, identityCurveFunction, identityCurveSignal, identityCurve, hardClipCurve, hardClipCurveAsym, softClipCurve, softClipCurveAsym, halfRectCurve, fullRectCurve, signalBuffer, inputBus, distortedSignal, shaper, buffer, hardClipCurveFunction, hardClipCurveFunctionAsym, softClipCurveFunction, softClipCurveFunctionAsym, halfRectCurveFunction, fullRectCurveFunction, hardClipCurveSignal, hardClipCurveSignalAsym, softClipCurveSignal, softClipCurveSignalAsym, halfRectCurveSignal, fullRectCurveSignal, outputBus, inputScope, outputScope, transferFunctionBox, freqValue1, freqValue2, image, alpha, bounds, compositeView, scopePos, freqModeMenu, dbRangeMenu, transferFunc, data, x, plotContainer, transferFuncPlot, val;
+var window, freq, scope, sine1FrequencyKnob, sine2FrequencyKnob, sine1GainKnob, sine2GainKnob, knob3, startButton1, startButton2, sine, sine2, gain, curve, distMenu, oversamplingMenu, inputSignal, filteredSignal, filterCutoff, cutoffMenu, selectedCutoff, distortionType, identityCurveFunction, identityCurveSignal, identityCurve, hardClipCurve, hardClipCurveAsym, softClipCurve, softClipCurveAsym, halfRectCurve, fullRectCurve, signalBuffer, inputBus, distortedSignal, shaper, buffer, hardClipCurveFunction, hardClipCurveFunctionAsym, softClipCurveFunction, softClipCurveFunctionAsym, halfRectCurveFunction, fullRectCurveFunction, hardClipCurveSignal, hardClipCurveSignalAsym, softClipCurveSignal, softClipCurveSignalAsym, halfRectCurveSignal, fullRectCurveSignal, outputBus, inputScope, outputScope, transferFunctionBox, freqValue1, freqValue2, image, alpha, bounds, compositeView, scopePos, freqModeMenu, dbRangeMenu, transferFunc, data, x, plotContainer, transferFuncPlot, val, currentDir;
 
 
 //BUSSES
@@ -79,7 +79,10 @@ shaper = Synth.after(sine, \shaper, [
 
 
 // GUI
-image = Image.new("images/teachbg.png");
+// samplePath = thisProcess.nowExecutingPath.dirname;
+// image = Image.new("images/teachbg.png");
+currentDir = thisProcess.nowExecutingPath.dirname;
+image = Image.new(currentDir +/+ "images/teachbg.png");
 alpha = 1.0;
 bounds = Rect(0, 0, 1280, 720);
 
@@ -93,7 +96,7 @@ b = Button(window, Rect(422, 678, 437, 30))
 .states_([["TAKE ME TO THE QUIZ", Color.black, Color.red]])
 .font_(Font("Monaco",20, true))
 .action = {
-	thisProcess.interpreter.executeFile("FabDist_learn.scd");
+	thisProcess.interpreter.executeFile(currentDir +/+ "FabDist_learn.scd");
 	sine.run(false);
 	sine2.run(false);
 };
@@ -273,3 +276,8 @@ dbRangeMenu = PopUpMenu(window, Rect(1000, 620, 150, 30))
 window.onClose_({ sine.free; s.freeAll;});
 
 )
+
+// image = Image.new("images/teachbg.png");
+image = Image.new(thisProcess.nowExecutingPath.dirname +/+ "images/teachbg.png");
+
+thisProcess.nowExecutingPath.dirname ';
